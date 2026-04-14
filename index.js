@@ -14,7 +14,7 @@ app.use(cors());
 app.use("/api/equipos", routerEquipos);
 
 app.get('/', (req, res) => {
-    res.send('Servidor Express en funcionamiento');
+    res.send('API de la remontada' + process.env.EJEMPLO);
     console.log('Se ha recibido una solicitud GET en la ruta /');
 });
 
