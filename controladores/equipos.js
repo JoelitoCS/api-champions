@@ -1,37 +1,21 @@
-//array con datos de equipos de la champions
-const equipos = [
-    {
-        id: 1,
-        nombre: 'Real Madrid',
-    },
-    {
-        id: 2,
-        nombre: 'Manchester City',
-    },
-    {
-        id: 3,
-        nombre: 'Manchester United',
-    },
-]
+import { Equipo } from "../modelos/modeloEquipos.js";
 
 
-
-export function leerEquipos(req, res){
-    console.log('Se ha recibido una solicitud GET en la ruta /api/equipos');
-    res.json ({
-        mensaje: 'Lista de equipos de controlador',
-        equipos: equipos
-    })
-
+export async function leerEquipos(req, res){
+    try {
+        const equipos = await Equipo.find({});
+        res.json({ mensaje: 'Lista de equipos', equipos });
+    } catch (err) {
+        res.status(500).json({ mensaje: 'Error al obtener los equipos' });
+    }
 }
 
-
-export function añadirEquipos(req, res){
-    console.log('Se ha recibido una solicitud POST en la ruta /api/equipos');
-    const nuevoEquipo = req.body;
-    equipos.push(nuevoEquipo);
-    res.json({
-        mensaje: 'Equipo añadido correctamente',
-        equipo: nuevoEquipo
-    })
+export async function añadirEquipos(req, res){
+    try {
+        const nuevoEquipo = new Equipo(req.body);
+        const equipo = await nuevoEquipo.save();
+        res.status(201).json({ mensaje: 'Equipo añadido correctamente', equipo });
+    } catch (err) {
+        res.status(500).json({ mensaje: 'Error al añadir el equipo' });
+    }
 }
