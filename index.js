@@ -1,5 +1,3 @@
-console.log('Hello, World!');
-
 import cors from 'cors';
 import express from 'express';
 import routerEquipos from './rutas/equipos.js';
@@ -10,7 +8,7 @@ const PORT = process.env.PORT || 3000;
 
 app.use(cors());
 //middleware para rutas
-
+app.use(express.json());
 app.use("/api/equipos", routerEquipos);
 
 app.get('/', (req, res) => {
