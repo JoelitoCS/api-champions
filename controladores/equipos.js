@@ -16,6 +16,6 @@ export async function añadirEquipos(req, res){
         const equipo = await nuevoEquipo.save();
         res.status(201).json({ mensaje: 'Equipo añadido correctamente', equipo });
     } catch (err) {
-        res.status(500).json({ mensaje: 'Error al añadir el equipo' });
+        res.status(500).json({ mensaje: 'Error al añadir el equipo', error: err.message }); // ← añade error: err.message
     }
 }
