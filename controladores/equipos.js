@@ -24,3 +24,14 @@ export function leerEquipos(req, res){
     })
 
 }
+
+
+export function añadirEquipos(req, res){
+    console.log('Se ha recibido una solicitud POST en la ruta /api/equipos');
+    const nuevoEquipo = req.body;
+    equipos.push(nuevoEquipo);
+    res.json({
+        mensaje: 'Equipo añadido correctamente',
+        equipo: nuevoEquipo
+    })
+}
